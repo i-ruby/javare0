@@ -1,34 +1,40 @@
-package work.iruby.leetcode;//给定一个二叉树，检查它是否是镜像对称的。
+package work.iruby.leetcode.easy;//给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
+//
+// 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。 
 //
 // 
 //
-// 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 
+// 示例 1： 
 //
-//     1
-//   / \
-//  2   2
-// / \ / \
-//3  4 4  3
+// 
+//输入：p = [1,2,3], q = [1,2,3]
+//输出：true
+// 
+//
+// 示例 2： 
+//
+// 
+//输入：p = [1,2], q = [1,null,2]
+//输出：false
+// 
+//
+// 示例 3： 
+//
+// 
+//输入：p = [1,2,1], q = [1,1,2]
+//输出：false
 // 
 //
 // 
 //
-// 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 
-//
-//     1
-//   / \
-//  2   2
-//   \   \
-//   3    3
-// 
+// 提示： 
 //
 // 
-//
-// 进阶： 
-//
-// 你可以运用递归和迭代两种方法解决这个问题吗？ 
-// Related Topics 树 深度优先搜索 广度优先搜索 
-// 👍 1361 👎 0
+// 两棵树上的节点数目都在范围 [0, 100] 内 
+// -104 <= Node.val <= 104 
+// 
+// Related Topics 树 深度优先搜索 
+// 👍 608 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -48,23 +54,18 @@ package work.iruby.leetcode;//给定一个二叉树，检查它是否是镜像�
  * }
  * }
  */
-public class Solution101 {
-    public boolean isSymmetric(TreeNode root) {
-        return isMirror(root.left, root.right);
-    }
-
-    // mirror
-    private boolean isMirror(TreeNode l, TreeNode r) {
-        if (l == null && r == null) {
+public class Solution100 {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
             return true;
         }
-        if (l == null || r == null) {
+        if (p == null || q == null) {
             return false;
         }
-        if (l.val != r.val) {
+        if (p.val != q.val){
             return false;
         }
-        return isMirror(l.left, r.right) && isMirror(l.right, r.left);
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
     private static class TreeNode {
@@ -84,6 +85,7 @@ public class Solution101 {
             this.left = left;
             this.right = right;
         }
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

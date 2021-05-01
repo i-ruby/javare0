@@ -1,8 +1,7 @@
 package work.iruby;
 
 
-import work.iruby.leetcode.Solution69;
-import work.iruby.leetcode.Solution70;
+import work.iruby.leetcode.easy.Solution108;
 
 /**
  * @author Ruby
@@ -10,9 +9,10 @@ import work.iruby.leetcode.Solution70;
 public class SomeThings {
 
     public static void main(String[] args) {
-        Solution70 solution = new Solution70();
-        int[] nums = {9};
-        System.out.println(solution.climbStairs(45));
+        Solution108 solution = new Solution108();
+        int[] nums = {-10,-3,0,5,9};
+        System.out.println(solution.sortedArrayToBST(nums));
+        System.out.println();
     }
 
 
