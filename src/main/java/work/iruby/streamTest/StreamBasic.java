@@ -75,6 +75,7 @@ public class StreamBasic {
         Stream<Integer> outputStream = inputStream.
                 flatMap((childList) -> childList.stream());
         outputStream.forEach(System.out::println);
+
     }
 
     private Stream<char[]> stringToChars(String str) {
