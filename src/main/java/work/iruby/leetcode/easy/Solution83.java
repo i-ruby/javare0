@@ -33,6 +33,8 @@ package work.iruby.leetcode.easy;//存在一个按升序排列的链表，给你
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
+import work.iruby.leetcode.common.ListNode;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -60,23 +62,6 @@ public class Solution83 {
             }
         }
         return head;
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }
 

@@ -17,8 +17,44 @@ public class SomeThings {
         node2.next = node3;
         node3.next = node4;
         node4.next = null;
-        System.out.println(isCircle(node1));
+        //System.out.println(isCircle(node1));
 
+        System.out.println(binarySearchFindLeft(new int[]{-1, 0, 3, 5, 9, 12}, 1));
+
+    }
+
+    private static int binarySearch(int[] arr, int tar) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int start = 0, end = arr.length - 1;
+        while (start <= end) {
+            int mid = (end - start) / 2 + start;
+            if (arr[mid] == tar) {
+                return mid;
+            }
+            if (arr[mid] > tar) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    private static int binarySearchFindLeft(int[] arr, int tar) {
+        int start = 0, end = arr.length;
+        while (start < end) {
+            int mid = (end - start) / 2 + start;
+            if (arr[mid] == tar) {
+                end = mid;
+            } else if (arr[mid] > tar) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return end;
     }
 
     private static boolean isCircle(ListNode node) {
@@ -29,7 +65,7 @@ public class SomeThings {
         ListNode fast = node.next;
         while (slow != fast) {
             slow = slow.next;
-            if (fast.next == null || fast.next.next == null){
+            if (fast.next == null || fast.next.next == null) {
                 return false;
             }
             fast = fast.next.next;
