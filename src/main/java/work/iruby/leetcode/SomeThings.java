@@ -3,6 +3,9 @@ package work.iruby.leetcode;
 
 import work.iruby.leetcode.common.ListNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Ruby
  */
@@ -19,7 +22,9 @@ public class SomeThings {
         node4.next = null;
         //System.out.println(isCircle(node1));
 
-        System.out.println(binarySearchFindLeft(new int[]{-1, 0, 3, 5, 9, 12}, 1));
+        //System.out.println(binarySearchFindLeft(new int[]{-1, 0, 3, 5, 9, 12}, 1));
+        SomeThings someThings = new SomeThings();
+        System.out.println(someThings.generateParenthesis(4));
 
     }
 
@@ -71,6 +76,25 @@ public class SomeThings {
             fast = fast.next.next;
         }
         return true;
+    }
+
+    List<String> stringList = new ArrayList<>();
+    public List<String> generateParenthesis(int n) {
+        int l = 0, r = 0;
+        String s = "";
+        test("", 0, 0, n);
+        return stringList;
+    }
+    private void test(String s, int l, int r, int n) {
+        if (l >= r && l < n) {
+            test(s + "(", l + 1, r, n);
+            test(s + ")", l, r + 1, n);
+        } else if (l >= r && l == n) {
+            test(s + ")", l, r + 1, n);
+        }
+        if (l == r && l == n) {
+            stringList.add(s);
+        }
     }
 
 }
