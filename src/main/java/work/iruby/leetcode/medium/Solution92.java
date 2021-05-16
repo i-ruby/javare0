@@ -50,22 +50,24 @@ import work.iruby.leetcode.common.ListNode;
  */
 class Solution92 {
     public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode guard = dummyHead;
 
-        ListNode dummyNode = new ListNode(-1);
-        dummyNode.next = head;
-        ListNode preNode = dummyNode;
+
         for (int i = 1; i < left; i++) {
-            preNode = preNode.next;
+            // 标记反转的头
+            guard = guard.next;
         }
-        ListNode curNode = preNode.next;
-        ListNode nextNode;
+
+        ListNode point = guard.next;
         for (int i = 0; i < right - left; i++) {
-            nextNode = curNode.next;
-            curNode.next = nextNode.next;
-            nextNode.next = preNode.next;
-            preNode.next = nextNode;
+            ListNode removeNode = point.next;
+            point.next = point.next.next;
+            removeNode.next = guard.next;
+            guard.next = removeNode;
         }
-        return dummyNode.next;
+        return dummyHead.next;
     }
 
     static class Test {
@@ -77,7 +79,7 @@ class Solution92 {
             ListNode node2 = new ListNode(2, node3);
             ListNode node1 = new ListNode(1, node2);
 
-            System.out.println(solution92.reverseBetween(node1, 2, 5).val);
+            System.out.println(solution92.reverseBetween(node1, 2, 3).val);
             System.out.println();
         }
     }
