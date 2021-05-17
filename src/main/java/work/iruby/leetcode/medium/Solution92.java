@@ -54,7 +54,6 @@ class Solution92 {
         dummyHead.next = head;
         ListNode guard = dummyHead;
 
-
         for (int i = 1; i < left; i++) {
             // 标记反转的头
             guard = guard.next;
