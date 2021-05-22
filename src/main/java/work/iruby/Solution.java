@@ -1,44 +1,83 @@
-package work.iruby;
+package work.iruby;//给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+//
+//
+//
+// 示例 1：
+//
+//
+//输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+//输出：6
+//解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+//
+//
+// 示例 2：
+//
+//
+//输入：nums = [1]
+//输出：1
+//
+//
+// 示例 3：
+//
+//
+//输入：nums = [0]
+//输出：0
+//
+//
+// 示例 4：
+//
+//
+//输入：nums = [-1]
+//输出：-1
+//
+//
+// 示例 5：
+//
+//
+//输入：nums = [-100000]
+//输出：-100000
+//
+//
+//
+//
+// 提示：
+//
+//
+// 1 <= nums.length <= 3 * 104
+// -105 <= nums[i] <= 105
+//
+//
+//
+//
+// 进阶：如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的 分治法 求解。
+// Related Topics 数组 分治算法 动态规划
+// 👍 3172 👎 0
 
 
-import java.util.HashMap;
-
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        int[] res = {0, 1};
-        if (nums.length == 2) {
-            return res;
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (map.get(target - nums[i]) != null) {
-                res[0] = map.get(target - nums[i]);
-                res[1] = i;
-                return res;
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int max = nums[0];
+        for (int i = 0; i < n; i++) {
+            int count = nums[i];
+            for (int j = 0; j < n; j++) {
+                count += nums[j];
             }
-            map.putIfAbsent(nums[i], i);
-        }
-        return res;
-    }
-
-
-    public String countAndSay(int n) {
-        if (n == 1) {
-            return "1";
-        }
-        String s = countAndSay(n - 1);
-        StringBuilder stringBuilder = new StringBuilder();
-        char ch ;
-        for (int i = 0; i < s.length(); ) {
-            int count = 0;
-            ch = s.charAt(i);
-            while (i < s.length() && s.charAt(i) == ch) {
-                i++;
-                count++;
+            if (count > max) {
+                max = count;
             }
-            stringBuilder.append(count).append(ch);
         }
-        return stringBuilder.toString();
+        return max;
     }
-
+    static class Test {
+        public static void main(String[] args) {
+            Solution test = new Solution();
+            long start = System.currentTimeMillis();
+            System.out.println(test.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+            long end = System.currentTimeMillis();
+            System.out.println("执行用时: " + (end - start) + " ms");
+        }
+    }
 }
+//leetcode submit region end(Prohibit modification and deletion)
