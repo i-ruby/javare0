@@ -1,4 +1,4 @@
-package work.iruby;
+package work.iruby.misc;
 
 import java.io.IOException;
 import java.nio.file.Files;
