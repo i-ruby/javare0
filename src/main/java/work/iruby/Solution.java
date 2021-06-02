@@ -52,29 +52,28 @@ package work.iruby;//给定一个整数数组 nums ，找到一个具有最大�
 // 进阶：如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的 分治法 求解。
 // Related Topics 数组 分治算法 动态规划
 // 👍 3172 👎 0
-
+// 根
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int maxSubArray(int[] nums) {
-        int n = nums.length;
-        int max = nums[0];
-        for (int i = 0; i < n; i++) {
-            int count = nums[i];
-            for (int j = 0; j < n; j++) {
-                count += nums[j];
+    public String numberRoot(String str) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < str.length(); i++) {
+            int c = str.charAt(i);
+            int n = c - 'a' + 10;
+            while (n >= 10) {
+                n = n % 10 + n / 10;
             }
-            if (count > max) {
-                max = count;
-            }
+            stringBuffer.append(n);
         }
-        return max;
+        return stringBuffer.toString();
     }
+
     static class Test {
         public static void main(String[] args) {
             Solution test = new Solution();
             long start = System.currentTimeMillis();
-            System.out.println(test.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+            System.out.println(test.numberRoot("q"));
             long end = System.currentTimeMillis();
             System.out.println("执行用时: " + (end - start) + " ms");
         }
