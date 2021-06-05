@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class WordCount {
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
         ForkJoinPool pool = new ForkJoinPool(3);
-        Path path = Paths.get("src/main/java/work/iruby/sort");
+        Path path = Paths.get("src/main/java/work/iruby");
         List<Path> pathList = Files.list(path).collect(Collectors.toList());
         System.out.println(pool.submit(new Count(pathList)).join());
     }
@@ -64,8 +64,8 @@ public class WordCount {
         private Map<String, Integer> countWord(Path path) {
             try {
                 Files.lines(path)
-                        .flatMap(s -> Arrays.stream(s.replaceAll("[.,;<>()\\[\\]{}\"]+", " ")
-                                .split(" ")))
+                        .flatMap(s -> Arrays.stream(s.replaceAll("['.,;<>(){}\\[\\]\"]+", " ")
+                                .split("\s+")))
                         .forEach(w -> map.merge(w, 1, Integer::sum));
             } catch (IOException e) {
                 e.printStackTrace();

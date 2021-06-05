@@ -7,6 +7,16 @@ public class ListNode {
     ListNode() {
     }
 
+    public static ListNode of(int[] ints) {
+        ListNode p = new ListNode(-1, null);
+        ListNode q = p;
+        for (int anInt : ints) {
+            q.next = new ListNode(anInt);
+            q = q.next;
+        }
+        return p.next;
+    }
+
     public ListNode(int val) {
         this.val = val;
     }
