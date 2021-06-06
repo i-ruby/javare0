@@ -34,23 +34,25 @@
         </dependency>
     </dependencies>
 
-<!--    <build>-->
+    <build>
 <!--        <plugins>-->
 <!--            <plugin>-->
 <!--                <groupId>work.iruby</groupId>-->
-<!--                <artifactId>loc-maven-plugin</artifactId>-->
+<!--                <artifactId>wordcount-maven-plugin</artifactId>-->
 <!--                <version>1.0-SNAPSHOT</version>-->
+<!--                <configuration>-->
+<!--                    <basedir>src/main/java</basedir>-->
+<!--                    <outputFile>target/wordcount.txt</outputFile>-->
+<!--                </configuration>-->
 <!--                <executions>-->
 <!--                    <execution>-->
 <!--                        <goals>-->
-<!--                            <goal>-->
-<!--                                count-->
-<!--                            </goal>-->
+<!--                            <goal>wordcount</goal>-->
 <!--                        </goals>-->
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->
 <!--        </plugins>-->
-<!--    </build>-->
+    </build>
 
 </project>
