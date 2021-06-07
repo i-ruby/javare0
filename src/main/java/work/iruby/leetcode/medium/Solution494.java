@@ -44,8 +44,7 @@ package work.iruby.leetcode.medium;//给你一个整数数组 nums 和一个整�
 // 👍 738 👎 0
 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution494 {
@@ -60,21 +59,28 @@ class Solution494 {
     }
 
     public int findTargetSumWays(int[] nums, int target) {
-        Map<Integer, Integer> targetMap = new HashMap<>();
-        targetMap.put(0, 1);
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                continue;
-            }
-            Map<Integer, Integer> map = new HashMap<>();
-            int finalI = i;
-            targetMap.forEach((k, v) -> {
-                map.merge(k + nums[finalI], v, Integer::sum);
-                map.merge(k - nums[finalI], v, Integer::sum);
-            });
-            targetMap = map;
+        int sum = Arrays.stream(nums).sum();
+        int def = sum - target;
+        if (def < 0 || def % 2 != 0) {
+            return 0;
         }
-        return targetMap.getOrDefault(target, 0);
+        // 取负号的总值为 def/2 , 此时正总值为 target + def/2 , 差值为target
+        int neg = def / 2;
+        int n = nums.length;
+
+        int[][] res = new int[2][neg + 1];
+        res[0][0] = 1;
+        // 当前对第i-1个数进行选择
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= neg; j++) {
+                res[i % 2][j] = res[(i + 1) % 2][j];
+                int num = nums[i - 1];
+                if (j >= num) {
+                    res[i % 2][j] += res[(i + 1) % 2][j - num];
+                }
+            }
+        }
+        return res[n % 2][neg];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
