@@ -47,17 +47,18 @@ class Solution1893 {
         public static void main(String[] args) {
             Solution1893 test = new Solution1893();
             long start = System.currentTimeMillis();
-            System.out.println(test.isCovered(new int[][]{{1, 5}, {2, 3}}, 1, 4));
+            System.out.println(test.isCovered(new int[][]{{1, 10}, {10, 20}}, 1, 21));
             long end = System.currentTimeMillis();
             System.out.println("执行用时: " + (end - start) + " ms");
         }
     }
 
     public boolean isCovered(int[][] ranges, int left, int right) {
-        return solution1(ranges, left, right);
+        return solution2(ranges, left, right);
     }
 
 
+    //暴力
     private boolean solution1(int[][] ranges, int left, int right) {
         boolean[] tar = new boolean[51];
         for (int[] range : ranges) {
@@ -70,6 +71,28 @@ class Solution1893 {
                 return false;
             }
         }
+        return true;
+    }
+
+    //差分数组
+    private boolean solution2(int[][] ranges, int left, int right) {
+        int[] tar = new int[52];
+        for (int[] range : ranges) {
+            tar[range[0]]++;
+            tar[range[1] + 1]--;
+        }
+
+        int sum = 0;
+        for (int i = 0; i < tar.length; i++) {
+            sum += tar[i];
+            tar[i] = sum;
+            if (i >= left && i <= right) {
+                if (tar[i] <= 0) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 }
